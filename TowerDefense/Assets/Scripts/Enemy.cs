@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public event System.Action OnDeath;
+
     public float Speed;
     public float RotationSpeed;
     public Transform[] Points;
@@ -34,6 +36,10 @@ public class Enemy : MonoBehaviour
             MyAnimator.Play("Walk");
             if (_index >= Points.Length)
             {
+            if(OnDeath != null)
+            {
+                    OnDeath();
+            }
                 Destroy(gameObject);
             }
             else
