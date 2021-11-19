@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public Wave[] waves;
-    public Enemy EnemyPrefab;
+    public Goblin EnemyPrefab;
     public Transform[] Points;
 
     //Wave _typeEnemy;
@@ -24,8 +24,9 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         NextWave();
-        //_timer = SpawnDeley;
         //_index = 0;
+        //_timer = SpawnDeley;
+
     }
 
 
@@ -35,7 +36,9 @@ public class Spawner : MonoBehaviour
         {
             _enemyRemainingToSpawn--;
             _nextSpawnTime = Time.time + _currentWave.SpawnDeley;
-            Enemy enemy = Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+            Goblin enemy = Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+            enemy.StartHP = _currentWave.EnemyHp;
+            _currentWave = waves[_currentWaveNumber - 1];
             enemy.Points = Points;
             enemy.OnDeath += OnEnemyDeath;
             //_timer -= Time.deltaTime;
@@ -70,7 +73,7 @@ public class Spawner : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-
+        public float EnemyHp;
         public int EnemyCount;
         public float SpawnDeley;
     }

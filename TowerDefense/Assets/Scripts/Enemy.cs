@@ -23,12 +23,8 @@ public class Enemy : MonoBehaviour
     {
         _dirrection = _currentPoint.position - transform.position;
         Vector3 newDirrection = Vector3.RotateTowards(transform.forward, _dirrection, Time.deltaTime * RotationSpeed, 0);
-
         transform.rotation = Quaternion.LookRotation(newDirrection);
-        transform.position = Vector3.MoveTowards(
-        transform.position,
-        _currentPoint.position,
-        Time.deltaTime * Speed);
+        transform.position = Vector3.MoveTowards(transform.position, _currentPoint.position, Time.deltaTime * Speed);
         
         if (transform.position == _currentPoint.position)
         {
