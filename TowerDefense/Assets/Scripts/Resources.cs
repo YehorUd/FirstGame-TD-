@@ -7,8 +7,7 @@ public class Resources : MonoBehaviour
 {
     public int Gold, TowerCost, EnemyCost;
     public Text GoldText;
-
-    public GameObject _oneLive, _twoLive, _threeLive;
+    public GameObject OneLive, TwoLive, ThreeLive;
     private int _index;
     void Start()
     {
@@ -28,8 +27,8 @@ public class Resources : MonoBehaviour
     public void MissEnemy()
     {
         if (_index == 1)
-            _twoLive.gameObject.SetActive(false);
-        _threeLive.gameObject.SetActive(false);
+            TwoLive.gameObject.SetActive(false);
+        ThreeLive.gameObject.SetActive(false);
         _index++;
 
 

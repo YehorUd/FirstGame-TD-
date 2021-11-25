@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
     void OnEnemyDeath()
     {
         _enemyRemainingAlive--;
-        if (_enemyRemainingAlive == 0)
+        if (_enemyRemainingAlive <= 0)
             NextWave();
     }
     void NextWave()

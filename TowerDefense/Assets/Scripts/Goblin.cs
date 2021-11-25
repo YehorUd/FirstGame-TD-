@@ -10,6 +10,7 @@ public class Goblin : MonoBehaviour
     public float RotationSpeed;
     public Transform[] Points;
     public float StartHP;
+    public float delay = 0f;
 
     private Resources _res;
     private float _hp;
@@ -27,15 +28,27 @@ public class Goblin : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Bullet")){
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
             Destroy(collision.gameObject);
             _hp -= collision.gameObject.GetComponent<Bullet>().Damage;
 
-            if(_hp <0 ){
-                Destroy(gameObject);
-                _res.EnemyKill();
+            if (IsDead)
+            {
+                if (OnDeath != null)
+                {
+                    OnDeath();
+                }
+                MyAnimator.Play("Die01");
+                Destroy(gameObject,this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+                    _res.EnemyKill();
             }
         }
+    }
+    public bool IsDead{
+    get{
+            return _hp <= 0;
+    }
     }
     void Update()
     {

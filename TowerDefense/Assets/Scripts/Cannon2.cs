@@ -8,7 +8,7 @@ public class Cannon2 : MonoBehaviour
     public float FireDeley, Radius, Damage;
     public LayerMask EnemyLayer;
 
-    private bool _gunLook;
+    //private static bool _gunLook = false;
     private float _fireTimer;
     private Transform _enemy, _gun, _firePoint;
 
@@ -26,11 +26,10 @@ public class Cannon2 : MonoBehaviour
         {
             Vector3 lookAt = _enemy.position;
             lookAt.y = _gun.position.y;
-            Vector3 newDirrection = Vector3.RotateTowards(_gun.forward, _gun.position - lookAt, Time.deltaTime, 0);
+            Vector3 newDirrection = Vector3.RotateTowards(_gun.forward, _gun.position - lookAt, _fireTimer,0);
             _gun.rotation = Quaternion.LookRotation(newDirrection);
-            _gunLook = true;
-            if (_gunLook == true)
                 Fire();
+          
             //_gun.rotation = Quaternion.Lerp(_gun.rotation - lookAt, _enemy.rotation, Time.time * _speedRotate);
 
 
